@@ -57,6 +57,7 @@ exports.updateLoan = async (req, res) => {
             },
             data: data,
         })
+        res.status(201)
         res.json(updateLoan)
     }
     catch (error) {
