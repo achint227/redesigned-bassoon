@@ -18,7 +18,9 @@
   "homepage": "https://github.com/achint227/redesigned-bassoon#readme",
   "dependencies": {
     "@prisma/client": "^4.5.0",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
+    "morgan": "^1.10.0",
     "prisma": "^4.5.0"
   }
 }
