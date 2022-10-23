@@ -33,24 +33,47 @@ exports.getAllLoans = async (req, res) => {
 exports.getLoan = async (req, res) => {
 
     const { id } = req.params
-    const loan = await prisma.Loan.findUnique({
-        where: {
-            id: id,
-        },
-    })
-    res.json(loan)
+    try {
+        const loan = await prisma.Loan.findUnique({
+            where: {
+                id: id,
+            },
+        })
+        res.json(loan)
+    }
+    catch (error) {
+        res.json({ error: `Loan with ID ${id} does not exist in the database` })
+    }
 }
 exports.updateLoan = async (req, res) => {
     const { id } = req.params
+    data = req.body
+    delete data.id
+    try {
+        const updateLoan = await prisma.Loan.update({
+            where: {
+                id: id,
+            },
+            data: data,
+        })
+        res.json(updateLoan)
+    }
+    catch (error) {
+        res.json({ error: `Loan with ID ${id} does not exist in the database` })
+    }
 
 }
 exports.deleteLoan = async (req, res) => {
     const { id } = req.params
-    const loan = await prisma.Loan.delete({
-        where: {
-            id: id,
-        },
-    })
-    res.json(loan)
-
+    try {
+        const loan = await prisma.Loan.delete({
+            where: {
+                id: id,
+            },
+        })
+        res.json(loan)
+    }
+    catch (error) {
+        res.json({ error: `Loan with ID ${id} does not exist in the database` })
+    }
 }
