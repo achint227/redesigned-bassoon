@@ -15,6 +15,7 @@ exports.newLoan = async (req, res) => {
     const newLoan = await prisma.Loan.create({
         data: loan,
     })
+    res.status(201)
     return res.json(newLoan);
 
 
