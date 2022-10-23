@@ -8,9 +8,8 @@ var corsOptions = {
 };
 app.use(cors(corsOptions));
 // 1) MIDDLEWARES Morgan is used for debugging
-if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'));
-}
+
+app.use(morgan('tiny'));
 // 2)MIDDLEWARE json is used for injecting the body attribute in the pipeline
 app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
