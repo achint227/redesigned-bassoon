@@ -17,5 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // 3) MIDDLE ROUTES loading
 const loanRouter = require('./routes/loanRouter');
-app.use('/api/v1/loans', loanRouter);
+app.use('/api/v1/loan', loanRouter);
+app.use('/api/v1/customer', customerRouter);
+app.use('/api/v1/ledger', ledgerRouter);
 module.exports = app;

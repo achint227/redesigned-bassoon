@@ -3,14 +3,11 @@ const prisma = new PrismaClient()
 
 exports.newLoan = async (req, res) => {
     loan = {
-        address: req.body.address,
-        customerName: req.body.customerName,
-        description: req.body.description,
-        interest: parseInt(req.body.interest),
-        loanAmount: parseInt(req.body.loanAmount),
-        loanTermYears: parseInt(req.body.loanTermYears),
         loanType: req.body.loanType,
-        phoneNumber: req.body.phoneNumber,
+        loanNumber: parseInt(req.body.loanNumber),
+        amount: parseInt(req.body.amount),
+        interest: parseFloat(req.body.interest),
+        loanTermYears: parseFloat(req.body.loanTermYears)
     }
     const newLoan = await prisma.Loan.create({
         data: loan,
