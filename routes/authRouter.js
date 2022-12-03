@@ -4,8 +4,10 @@ const authController = require('../controllers/authController');
 
 router
     .route('/')
+    .post(authController.sign_in)
+router
+    .route('/register')
     .post(authController.register)
-    .get(authController.sign_in)
 router
     .route('/logout')
     .get(authController.authorization, (req, res) => {
