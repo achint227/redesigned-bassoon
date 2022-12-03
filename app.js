@@ -7,10 +7,8 @@ app.use(cookieParser());
 
 
 //This is CORS Ref:https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-var corsOptions = {
-    origin: "http://localhost:8080"
-};
-app.use(cors(corsOptions));
+
+app.use(cors());
 // 1) MIDDLEWARES Morgan is used for debugging
 
 app.use(morgan('tiny'));
