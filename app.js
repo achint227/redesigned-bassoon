@@ -1,7 +1,11 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const app = express();
+app.use(cookieParser());
+
+
 //This is CORS Ref:https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 var corsOptions = {
     origin: "http://localhost:8080"

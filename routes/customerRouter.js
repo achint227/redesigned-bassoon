@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const customerController = require('../controllers/customerController');
+import { authorization } from '../controllers/authController';
+
 router
     .route('/')
-    .post(customerController.newCustomer)
-    .get(customerController.getAllCustomers)
+    .post(authorization, customerController.newCustomer)
+    .get(authorization, customerController.getAllCustomers)
 router
     .route('/:id')
-    .get(customerController.getCustomer)
-    .put(customerController.updateCustomer)
-    .delete(customerController.deleteCustomer)
+    .get(authorization, customerController.getCustomer)
+    .put(authorization, customerController.updateCustomer)
+    .delete(authorization, customerController.deleteCustomer)
 module.exports = router;

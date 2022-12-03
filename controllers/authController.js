@@ -1,5 +1,6 @@
 const { PrismaClient } = require('@prisma/client')
 const jwt = require('jsonwebtoken')
+const { token } = require('morgan')
 const prisma = new PrismaClient()
 bcrypt = require('bcrypt')
 
@@ -26,7 +27,15 @@ exports.sign_in = async (req, res) => {
     if (user) {
         var correctPass = bcrypt.compareSync(req.body.pwd, user.pwdHash)
         if (correctPass) {
-            return res.json({ token: jwt.sign({ email: user.email, name: user.name, _id: user._id }, 'RESTFULAPIs') })
+            token = jwt.sign({ email: user.email }, 'StRoNGs3crE7')
+
+            res
+                .cookie('access_token', token, {
+                    httpOnly: true,
+                    secure: true
+                })
+                .status(200)
+                .json({ message: "Login successful" })
         }
 
     }
@@ -34,12 +43,17 @@ exports.sign_in = async (req, res) => {
     res.status(401).json({ message: "Authentication failed: Wrong username or Password" })
 
 }
-exports.login_required = (req, res, next) => {
-    if (req.user) {
-        next()
-    }
-    else {
-        return res.status(401).json({ message: "Unauthorized user!" })
-    }
 
-}
+exports.authorization = (req, res, next) => {
+    const token = req.cookies.access_token;
+    if (!token) {
+        return res.sendStatus(403);
+    }
+    try {
+        const data = jwt.verify(token, "StRoNGs3crE7");
+        req.email = data.email;
+        return next();
+    } catch {
+        return res.sendStatus(403);
+    }
+};

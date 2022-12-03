@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const ledgerController = require('../controllers/ledgerController');
+import { authorization } from '../controllers/authController';
+
 router
     .route('/')
-    .post(ledgerController.newLedger)
-    .get(ledgerController.getAllLedgers)
+    .post(authorization, ledgerController.newLedger)
+    .get(authorization, ledgerController.getAllLedgers)
 router
     .route('/:id')
-    .get(ledgerController.getLedger)
-    .put(ledgerController.updateLedger)
-    .delete(ledgerController.deleteLedger)
+    .get(authorization, ledgerController.getLedger)
+    .put(authorization, ledgerController.updateLedger)
+    .delete(authorization, ledgerController.deleteLedger)
 module.exports = router;
