@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const ledgerController = require('../controllers/ledgerController');
-import { authorization } from '../controllers/authController';
+const authorization = require('../controllers/authController').authorization
+
 
 router
     .route('/')

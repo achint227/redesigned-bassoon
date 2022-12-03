@@ -26,21 +26,22 @@ exports.sign_in = async (req, res) => {
     })
     if (user) {
         var correctPass = bcrypt.compareSync(req.body.pwd, user.pwdHash)
+        console.log(correctPass)
         if (correctPass) {
-            token = jwt.sign({ email: user.email }, 'StRoNGs3crE7')
+            var token = jwt.sign({ email: user.email }, 'StRoNGs3crE7')
 
             res
                 .cookie('access_token', token, {
                     httpOnly: true,
-                    secure: true
                 })
                 .status(200)
                 .json({ message: "Login successful" })
         }
 
     }
+    else
 
-    res.status(401).json({ message: "Authentication failed: Wrong username or Password" })
+        res.status(401).json({ message: "Authentication failed: Wrong username or Password" })
 
 }
 

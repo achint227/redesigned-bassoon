@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const loanController = require('../controllers/loanController');
-import { authorization } from '../controllers/authController';
+const authorization = require('../controllers/authController').authorization
 router
     .route('/')
     .post(authorization, loanController.newLoan)
