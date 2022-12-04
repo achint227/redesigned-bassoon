@@ -25,7 +25,7 @@ exports.getAllLoans = async (req, res) => {
         skip: skip,
         take: take
     })
-    res.json(loans)
+    res.send(loans)
 
 }
 exports.getLoan = async (req, res) => {
