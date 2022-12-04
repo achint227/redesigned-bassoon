@@ -15,7 +15,7 @@ exports.register = async (req, res) => {
     })
     console.log(user)
     console.log('ok')
-    return res.json(newUser);
+    return res.send({ message: "User was registered successfully!" });
 
 }
 exports.sign_in = async (req, res) => {
@@ -35,8 +35,10 @@ exports.sign_in = async (req, res) => {
                     httpOnly: true,
                 })
                 .status(200)
-                .json({ message: "Login successful" })
+                .send({ access_token: token, id: user.id, name: user.name, email: user.email, photoUrl: user.photoUrl })
         }
+        else
+            res.status(401).json({ message: "Authentication failed: Wrong username or Password" })
 
     }
     else

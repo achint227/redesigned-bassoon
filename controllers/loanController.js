@@ -13,7 +13,7 @@ exports.newLoan = async (req, res) => {
         data: loan,
     })
     res.status(201)
-    return res.json(newLoan);
+    return res.send(newLoan);
 
 
 }

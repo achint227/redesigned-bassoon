@@ -7,8 +7,18 @@ app.use(cookieParser());
 
 
 //This is CORS Ref:https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-
-app.use(cors());
+var whitelist = ['http://localhost:8081',/** other domains if any */]
+var corsOptions = {
+    credentials: true,
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
+app.use(cors(corsOptions));
 // 1) MIDDLEWARES Morgan is used for debugging
 
 app.use(morgan('tiny'));
